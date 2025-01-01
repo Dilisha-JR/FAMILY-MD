@@ -1,234 +1,140 @@
-//PRABATH YT BASE SUPPORT ❤️‍🔥
-
-// 𝙿𝙾𝚆𝙴𝚁𝙳  𝙱𝚈  𓄂𝐎ᴡͥɳͣᴇͫᴙ  𝐂ʏ͢ʙᴇʀ  𝚇 Aʏ͢ᴇꜱʜ
-
 const config = require('../config')
-const { cmd, commands } = require('../command')
+const {cmd , commands} = require('../command')
+const os = require("os")
 const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson} = require('../lib/functions')
-
-
 cmd({
-    pattern: "movie",
-    alias: ["movi","tests"],
-    use: '.movie <query>',
-    react: "🔎",
-    desc: "Moive downloader",
-    category: "movie",
-    filename: __filename
-
-},
-
-async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-
-let sadas = await fetchJson(`https://darksadas-yt-sinhalasub-search.vercel.app/?q=${q}`)
-const msg = `*🎥 MOVIE SEARCH 🎥*`
-
-if (sadas.data.length < 1) return await conn.sendMessage(from, { text: "🚩 *I couldn't find anything :(*" }, { quoted: mek } )
-
-  var rows = [];  
-  sadas.data.map((v) => {
-	rows.push({
-        buttonId: `.infodl ${v.Link}`,
-        buttonText: { displayText: `${v.Title}` },
-        type: 1
-          });
-        })
-
-const buttonMessage = {
- 
-image: {url: config.LOGO},	
-  caption: msg,
-  footer: config.FOOTER,
-  buttons: rows,
-  headerType: 4
-}
-return await conn.buttonMessage(from, buttonMessage, mek)
-} catch (e) {
-    console.log(e)
-  await conn.sendMessage(from, { text: '🚩 *Error !!*' }, { quoted: mek } )
-}
-})
-
-
-cmd({
-    pattern: "infodl",
-    alias: ["mdv"],
-    use: '.moviedl <url>',
-    react: "🎥",
-    desc: "download movies from sinhalasub.lk",
-    //category: "search",
-    filename: __filename
-
-},
-
-async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, prefix, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
-if (!q) return reply('🚩 *Please give me a url*')
-
-let sadas = await fetchJson(`https://darksadas-yt-sinhalasub-info-dl.vercel.app/?url=${q}`)
-
-	
-
-if (sadas.length < 1) return await conn.sendMessage(from, { text: "🚩 *I couldn't find anything :(*" }, { quoted: mek } )
-
- var rows = [];  	
-	
-	rows.push({
-      buttonId: prefix + 'daqt ' + q, buttonText: {displayText: 'Details send'}, type: 1}
-
-	  
-	  
-);
-  
-  sadas.downloadLinks.map((v) => {
-	rows.push({
-        buttonId: prefix + `mn ${v.link}±${sadas.title} - ${v.quality} - ${v.size}`,
-        buttonText: { displayText: `${v.size} - ${v.quality}` },
-        type: 1
-          },
-		 
-	//{buttonId: prefix + 'detailss ' + q, buttonText: {displayText: 'Details send'}, type: 1}	 
-		 
-		 
-		 
-		 
-		 );
-        })
- const msg = `   *🎥  MOVIE DOWNLODER 🎥*
- 
-* Tιтle   : ${sadas.title}*
-
-* Rᴇʟᴇᴀꜱᴇ ➜* _${sadas.date}_
-* Rᴀᴛɪɴɢ ➜* _${sadas.rating}_
-* Rᴜɴᴛɪᴍᴇ ➜* _${sadas.duration}_
-* Dɪʀᴇᴄᴛᴏʀ ➜* _${sadas.author}_
-* Cᴏᴜɴᴛʀʏ ➜* _${sadas.country}_ 
-
-
-`
-const buttonMessage = {
- 
-image: {url: sadas.images[0] || images},	
-  caption: msg,
-  footer: config.FOOTER,
-  buttons: rows,
-  headerType: 4
-}
-return await conn.buttonMessage(from, buttonMessage, mek)
-} catch (e) {
-    console.log(e)
-  await conn.sendMessage(from, { text: '🚩 *Error !!*' }, { quoted: mek } )
-}
-})
-
-
-cmd({
-    pattern: "mn",
-    react: "🎥",
-    alias: ["online", "test", "bot"],
+    pattern: "alive",
     desc: "Check bot online or no.",
-    //category: "other",
-    use: '.alive',
+    category: "main",
     filename: __filename
 },
-async (conn, mek, m, {
-    from,
-    prefix,
-    q,
-    pushname,
-    reply
-}) => {
-    try {
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+return await conn.sendMessage(from,{image: {url: config.ALIVE_IMG},caption: config.ALIVE_MSG},{quoted: mek})
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
 
-        if(!q) return await reply('please give me text !..')
-
-
-const datae = q.split("±")[0]
-const datas = q.split("±")[1]
-
-      let sadas = await fetchJson(`https://darksadas-yt-sinhalasub-dl.vercel.app/?url=${datae}`)    
-  
-	    const da = sadas.downloadLink.split("https://pixeldrain.com/u/")[1]
-const fhd = `https://pixeldrain.com/api/file/${da}`
-
-let mfg = `*DOWNLOAD MOVIE*
-`
- const buttons = [
-        {buttonId:`${prefix}fit ${fhd}±${datas}` , buttonText: {displayText: `Download Now`}, type: 1}
-        
-      ]
-        const buttonMessage = {
-		image: {url: 'https://telegra.ph/file/091fc81528af5881cdf47.jpg'},	
-            caption: mfg,
-            footer: config.FOOTER,
-            buttons: buttons,
-            headerType: 1
-        }
-       await conn.buttonMessage(from, buttonMessage, mek)
-       } catch (e) {
-            console.log(e)
-            reply('*Error !!*')
-        }
-    })
-
-
-
-
-
-
+//============ping=======
 cmd({
-    pattern: "fit",
-    react: "📥",
-    dontAddCommandList: true,
+    pattern: "ping",
+    react: "⚡",
+    alias: ["speed"],
+    desc: "Check bot\'s ping",
+    category: "main",
+    use: '.ping',
     filename: __filename
-}, async (conn, mek, m, { from, q, isMe, reply }) => {
-	
-    if (!q) {
-        return await reply('*Please provide a direct URL!*');
-    }
-  const data = q.split("±")[0]
-        const datas = q.split("±")[1]
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+var inital = new Date().getTime();
+let ping = await conn.sendMessage(from , { text: '```Pinging To index.js!!!```'  }, { quoted: mek } )
+var final = new Date().getTime();
+return await conn.edit(ping, '*Pong*\n *' + (final - inital) + ' ms* ' )
+} catch (e) {
+reply(`${e}`)
+console.log(e)
+}
+})
 
+//===========menu========
+cmd({
+    pattern: "menu",
+    desc: "To get the menu.",
+    react: "📜",
+    category: "main",
+    filename: __filename
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+    
+let menu = {
+main: '',
+download: '',
+group: '',
+owner: '',
+convert: '',
+ai: '',
+tools: '',
+search: '',
+fun: '',
+voice: '',
+other: ''
+};
 
+for (let i = 0; i < commands.length; i++) {
+if (commands[i].pattern && !commands[i].dontAddCommandList) {
+menu[commands[i].category] += `.${commands[i].pattern}\n`;
+ }
+}
 
-    try {
- 
-		
+let madeMenu = `
+👋 𝐇𝐄𝐋𝐋𝐎, ${pushname}!
 
+✨ 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 your bot name ✨ 
+╭─「 ᴄᴏᴍᴍᴀɴᴅꜱ ᴘᴀɴᴇʟ」
+│◈ яυηтιмє * ${runtime(process.uptime())}
+│◈ σωηєя ηαмє * your name
+│◈ σωηєя ηυмвєя * your number 
+╰──────────●●►
+╭──────────●●►
+ 📥 *𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.download}
+╰───────────●●►
+╭──────────●●►
+ 👾 *𝐀𝐢 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.ai}
+╰───────────●●►
+╭──────────●●►
+ 🔧 *𝐌𝐚𝐢𝐧 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.main}
+╰───────────●●►
+╭──────────●●►
+ 🎉 *𝐅𝐮𝐧 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.fun}
+╰───────────●●►
+╭──────────●●►
+ 🔄 *𝐂𝐨𝐧𝐯𝐞𝐫𝐭 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.convert}
+╰───────────●●►
+╭──────────●●►
+ 🔍 *𝐒𝐞𝐚𝐫𝐜𝐡 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.search}
+╰───────────●●►
+╭──────────●●►
+ 👥 *𝐆𝐫𝐨𝐮𝐩 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.group}
+╰───────────●●►
+╭──────────●●►
+ 🔒 *𝐎𝐰𝐧𝐞𝐫 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.owner}
+╰───────────●●►
+╭──────────●●►
+ ⚙️ *𝐎𝐭𝐡𝐞𝐫 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.other}
+╰───────────●●►
+╭──────────●●►
+ 🛠️ *𝐓𝐨𝐨𝐥𝐬 𝐌𝐞𝐧𝐮*
+  ───────
+ ${menu.tools}
+╰───────────●●►
 
+> *©ᴘᴏᴡᴇʀᴇᴅ ʙʏ your bot name*`
 
-        const mediaUrl = data.trim();
-
-        const response = await axios.get(mediaUrl, { responseType: 'arraybuffer' });
-        const mediaBuffer = Buffer.from(response.data, 'binary');
-
-
-
-
-        const message = {
-            document: mediaBuffer,
-	    caption: `${datas}
-     
- *Darksadas YT*`,
-            mimetype: "video/mp4",
-            fileName: `${datas}🎬PODDA-X-MD🎬.mp4`,
-        };
-
-        await conn.sendMessage(config.JID, message);
-
-        await conn.sendMessage(from, { react: { text: '✔️', key: mek.key } });
-    } catch (error) {
-        console.error('Error fetching or sending', error);
-        await conn.sendMessage(from, '*Error fetching or sending *', { quoted: mek });
-    }
-});
-
-https://whatsapp.com/channel/0029VaiTjMlK5cDLek3bB533
-          
-
-
-`JOIN AND SHARE 🔥`
-
-
-> credit by සදස් yt❤️‍🔥
+return await conn.sendMessage(from,{image: {url: `https://files.catbox.moe/de82e3.jpg`},caption:madeMenu},{quoted: mek})
+}catch(e){
+console.log(e)
+reply(`𝔼𝕣𝕣𝕣𝕠𝕣`)
+}
+})
