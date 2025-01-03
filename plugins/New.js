@@ -37,7 +37,7 @@ Examples:
         const encodedQuery = encodeURIComponent(q);
 
         // API Request for movie search
-        const searchResponse = await axios.get(`https://api-site-2.vercel.app/api/sinhalasub/movie?url=${encodedQuery}`);
+        const searchResponse = await axios.get(`https://darksadas-yt-sinhalasub-dl.vercel.app/?url=${encodedQuery}`);
 
         // Validate search response
         if (!searchResponse.data || !searchResponse.data.status) {
