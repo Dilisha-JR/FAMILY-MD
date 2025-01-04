@@ -29,7 +29,7 @@
         "@tobyg74/tiktok-api-dl": "1.0.13",
         "@vitalets/google-translate-api": "9.2.0",
         "@whiskeysockets/baileys": "git+https://github.com/prabathLK/Baileys-6.0.0.git#master",
-        "api-dylux": "latest",
+        "api-dylux": "1.8.5",
         "aptoide-scraper": "1.0.1",
         "awesome-phonenumber": "7.2.0",
         "axios": "^1.7.8",
