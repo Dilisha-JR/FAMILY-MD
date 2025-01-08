@@ -1,115 +1,114 @@
-const url = `https://sinhalasub.lk?s=${q}`;
-const response = await axios.get(url);  
-const $ = cheerio.load(response.data);
-   
+[08/01, 16:02] > KING YAKUZA: const url = `https://firemovieshub.com/?s=${q}`;
+
+    // Launch Puppeteer browser
+    const browser = await puppeteer.launch({ headless: true }); // headless: true means the browser will run in the background
+    const page = await browser.newPage();
+
+    // Set a user-agent and go to the page
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
+
+    // Wait for the results to load (adjust the selector to the page's content)
+    await page.waitForSelector('div.title a'); // This waits for the movie titles to appear
+
+    // Get the page content after it has loaded
+    const pageContent = await page.content();
+
+    // Use Cheerio to parse the page content
+    const $ = cheerio.load(pageContent);
+
+    // Extract movie titles and links from the page
     const data = [];
     $("div.result-item").each((c, d) => {
 
         data.push({
              
-       link: $(d).find("div.title > a").attr("href"),
-         title: $(d).find("div.title > a").text(),       
+         title: $(d).find("div.title > a").text(),
+         ntitle: $(d).find("span.movies").text(),
+         year: $(d).find("span.year").text(),
+         link: $(d).find("a").attr("href"),
+         image: $(d).find("img").attr("src")
+         
+         
         })
     })
 
+await browser.close();
+[08/01, 16:02] > KING YAKUZA: const url = `${q}`
 
- const response1 = await axios.get(url);  
-const $1 = cheerio.load(response1.data);
-const next1 = $1("div.pagination > a.arrow_pag").attr("href")
-      const nextall = $1("div.resppages > a:nth-child(2)").attr("href")
+    // Launch Puppeteer browser
+    const browser = await puppeteer.launch({ headless: true }); // headless: true means the browser will run in the background
+    const page = await browser.newPage();
 
-if (q.includes("https://sinhalasub.lk/movies")) {
-const response = await axios.get(q);
-		    const $x = cheerio.load(response.data);
-		    const newsArticle = $x(".sheader").first();
-                    const newsHeadline = newsArticle.find(".data .head h1").text();
-                    const newsDate = newsArticle.find(".extra .tagline").text().trim();
-                    const newsTime = newsArticle.find(".poster img").attr("src");
-                    const date = newsArticle.find(".extra .date").text().trim();
-                    const duration = newsArticle.find(".extra .runtime").text().trim();
-                    const infoMovie = $x("#info").first();
-                    const desc = infoMovie.find(".wp-content p").text().trim();
-                    const rat = infoMovie.find("#repimdb strong").text().trim();
-                    const img = infoMovie.find("#dt_galery .owl-item a").attr("src");
-                    const country = $x("#single > div.content.right > div.sheader > div.data > div.extra > span.country").text().trim();
-const response1 = await axios.get(q);  
-const $ = cheerio.load(response1.data);
+    // Set a user-agent and go to the page
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
+
+    // Wait for the results to load (adjust the selector to the page's content)
+    await page.waitForSelector('div.data > h1'); // This waits for the movie titles to appear
+
+    // Get the page content after it has loaded
+    const pageContent = await page.content();
+
+    // Use Cheerio to parse the page content
+    const $ = cheerio.load(pageContent);
+
+    // Extract movie titles and links from the page
    
-    const data = [];
-    $("div#download.sbox > div > div > table > tbody > tr").each((c, d) => {
-        data.push({             
-         link: $(d).find("td > a").attr("href"),
-         quality: $(d).find("td > strong").text(),
-         size: $(d).find("td:nth-child(3)").text()       
-        })
-    })
-const response2 = await axios.get(q);  
-const $1 = cheerio.load(response2.data);   
-    const data1 = [];
-    $1("div#download-02.sbox > div > div > table > tbody > tr").each((c, d) => {
-        data1.push({           
-         link: $1(d).find("td > a").attr("href"),
-         quality: $1(d).find("td > strong").text(),
-         size: $1(d).find("td:nth-child(3)").text()         
-        })
-    })
-const response3 = await axios.get(q);  
-const $2 = cheerio.load(response3.data);
-    const data2 = [];
-    $2("div#download-03.sbox > div > div > table > tbody > tr").each((c, d) => {
-        data2.push({           
-         link: $2(d).find("td > a").attr("href"),
-         quality: $2(d).find("td > strong").text(),
-         size: $2(d).find("td:nth-child(3)").text()        
-        })
-    })
+  
+const title = $("div.data > h1").text()
+const image = $("div.poster > img").attr("src")
+const theme = $("span.tagline").text()
+const date = $("span.date").text()
+const duration = $("span.runtime").text()
+const generos = $("div.sgeneros > a:nth-child(1)").text()
+const generos1 = $("div.sgeneros > a:nth-child(2)").text()
+const generos2 = $("div.sgeneros > a:nth-child(3)").text()
+const desc = $("div.wp-content > p").text()
+const imdb = $("span.valor > strong").text()
+    // Output the results
+   
+    
+   
 
-const response4 = await axios.get(q);  
-const $3 = cheerio.load(response4.data);
-const images = []
-        $3("div.g-item").each((i, el) => {
-	images.push({	
-             url2: $3(el).find("a").attr("href").replace("\n" , ""),
-             
-	})    
- })
+      const $1 = cheerio.load(pageContent)
+      const data = [];
+      $1("tbody > tr").each((c, d) => {
+          data.push({            
+           link: $1(d).find("a").attr("href"),
+           quality: $1(d).find("strong.quality").text(),
+           size: $1(d).find("td:nth-child(3)").text()      
+          })      
+      })
+ 
+    // Close the browser after scraping
+    await browser.close();
+[08/01, 16:02] > KING YAKUZA: const url = 'https://firemovieshub.com/links/qw1ajhai6t/';
 
-cmd({
-    pattern: `mp4`,
-    react: "📥",
-    dontAddCommandList: true,
-    filename: __filename
-}, async (conn, mek, m, { from, q, isDev, reply }) => {
-	if ( !isDev ) return reply('⚠️ ⚠️ *Contact owner to Active your number To Premium user*')
-    if (!q) {
-        return await reply('*Please provide a direct URL!*');
-    }
+    // Launch Puppeteer browser
+    const browser = await puppeteer.launch({ headless: true }); // headless: true means the browser will run in the background
+    const page = await browser.newPage();
 
+    // Set a user-agent and go to the page
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+    await page.goto(url, { waitUntil: 'domcontentloaded' });
 
-    try {
+    // Wait for the results to load (adjust the selector to the page's content)
+    await page.waitForSelector('small.text a'); // This waits for the movie titles to appear
 
+    // Get the page content after it has loaded
+    const pageContent = await page.content();
 
-	    
-        //const mediaUrl = q.trim();
-        const mediaUrl = q.split("|")[0]
-        const title = q.split("|")[1]  || 'tc_movie_dl_system'
-	    
-     const response = await axios.get(mediaUrl);  
-const $ = cheerio.load(response.data);
-    const link = $("#link").attr("href")
-const drain = link.replace(/u/g, 'api/file')   
-console.log(drain)
+    // Use Cheerio to parse the page content
+    const $ = cheerio.load(pageContent);
 
-var vajiralod = [
-"《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
-"《 ████▒▒▒▒▒▒▒▒》30%",
-"《 ███████▒▒▒▒▒》50%",
-"《 ██████████▒▒》80%",
-"《 ████████████》100%",
-"𝙸𝙽𝙸𝚃𝙸𝙰𝙻𝙸𝚉𝙴𝙳 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙴𝙳 🦄..."
-]
-let { key } = await conn.sendMessage(from, {text: 'ᴜᴘʟᴏᴀᴅɪɴɢ ᴍᴏᴠɪᴇ...'})
-
-for (let i = 0; i < vajiralod.length; i++) {
-await conn.sendMessage(from, {text: vajiralod[i], edit: key })
-}
+    // Extract movie titles and links from the page
+   
+  
+  
+   
+    const title = $('small.text a').text();      
+     const dllink = $("a#link.btn").attr("href")
+ 
+    // Close the browser after scraping
+    await browser.close();
