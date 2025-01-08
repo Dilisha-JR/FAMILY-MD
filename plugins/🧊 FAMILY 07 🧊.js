@@ -1,44 +1,3 @@
-cmd({
-    pattern: `mp4`,
-    react: "📥",
-    dontAddCommandList: true,
-    filename: __filename
-}, async (conn, mek, m, { from, q, isDev, reply }) => {
-	if ( !isDev ) return reply('⚠️ ⚠️ *Contact owner to Active your number To Premium user*')
-    if (!q) {
-        return await reply('*Please provide a direct URL!*');
-    }
-
-
-    try {
-
-
-	    
-        //const mediaUrl = q.trim();
-        const mediaUrl = q.split("|")[0]
-        const title = q.split("|")[1]  || 'tc_movie_dl_system'
-	    
-     const response = await axios.get(mediaUrl);  
-const $ = cheerio.load(response.data);
-    const link = $("#link").attr("href")
-const drain = link.replace(/u/g, 'api/file')   
-console.log(drain)
-
-var vajiralod = [
-"《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
-"《 ████▒▒▒▒▒▒▒▒》30%",
-"《 ███████▒▒▒▒▒》50%",
-"《 ██████████▒▒》80%",
-"《 ████████████》100%",
-"𝙸𝙽𝙸𝚃𝙸𝙰𝙻𝙸𝚉𝙴𝙳 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙴𝙳 🔥..."
-]
-let { key } = await conn.sendMessage(from, {text: 'ᴜᴘʟᴏᴀᴅɪɴɢ ᴍᴏᴠɪᴇ...'})
-
-for (let i = 0; i < vajiralod.length; i++) {
-await conn.sendMessage(from, {text: vajiralod[i], edit: key })
-}
-
-
 const url = `https://sinhalasub.lk?s=${q}`;
 const response = await axios.get(url);  
 const $ = cheerio.load(response.data);
@@ -58,8 +17,6 @@ const $ = cheerio.load(response.data);
 const $1 = cheerio.load(response1.data);
 const next1 = $1("div.pagination > a.arrow_pag").attr("href")
       const nextall = $1("div.resppages > a:nth-child(2)").attr("href")
-
-
 
 if (q.includes("https://sinhalasub.lk/movies")) {
 const response = await axios.get(q);
@@ -116,3 +73,43 @@ const images = []
              
 	})    
  })
+
+cmd({
+    pattern: `mp4`,
+    react: "📥",
+    dontAddCommandList: true,
+    filename: __filename
+}, async (conn, mek, m, { from, q, isDev, reply }) => {
+	if ( !isDev ) return reply('⚠️ ⚠️ *Contact owner to Active your number To Premium user*')
+    if (!q) {
+        return await reply('*Please provide a direct URL!*');
+    }
+
+
+    try {
+
+
+	    
+        //const mediaUrl = q.trim();
+        const mediaUrl = q.split("|")[0]
+        const title = q.split("|")[1]  || 'tc_movie_dl_system'
+	    
+     const response = await axios.get(mediaUrl);  
+const $ = cheerio.load(response.data);
+    const link = $("#link").attr("href")
+const drain = link.replace(/u/g, 'api/file')   
+console.log(drain)
+
+var vajiralod = [
+"《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
+"《 ████▒▒▒▒▒▒▒▒》30%",
+"《 ███████▒▒▒▒▒》50%",
+"《 ██████████▒▒》80%",
+"《 ████████████》100%",
+"𝙸𝙽𝙸𝚃𝙸𝙰𝙻𝙸𝚉𝙴𝙳 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙴𝙳 🦄..."
+]
+let { key } = await conn.sendMessage(from, {text: 'ᴜᴘʟᴏᴀᴅɪɴɢ ᴍᴏᴠɪᴇ...'})
+
+for (let i = 0; i < vajiralod.length; i++) {
+await conn.sendMessage(from, {text: vajiralod[i], edit: key })
+}
